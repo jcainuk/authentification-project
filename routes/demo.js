@@ -29,6 +29,8 @@ router.post('/signup', async (req, res) => {
   };
 
   await db.getDb().collection('users').insertOne(user);
+
+  res.redirect('/login');
 });
 
 router.post('/login', async (req, res) => {});
