@@ -16,7 +16,12 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.post('/signup', async (req, res) => {});
+router.post('/signup', async (req, res) => {
+  const userData = req.body;
+  const { email } = userData;
+  const confirmEmail = userData['confirm-email'];
+  const { password } = userData;
+});
 
 router.post('/login', async (req, res) => {});
 
