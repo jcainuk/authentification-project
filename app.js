@@ -11,6 +11,8 @@ const MongoDBStore = mongodbStore(session);
 
 const app = express();
 
+const sessionStore = new MongoDBStore();
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
