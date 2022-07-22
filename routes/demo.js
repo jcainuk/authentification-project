@@ -40,6 +40,8 @@ router.post('/login', async (req, res) => {
   const userData = req.body;
   const enteredEmail = userData.email;
   const enteredPassword = userData.password;
+
+  const existingUser = await db.getDb().collection('users').findOne({ email: enteredEmail });
 });
 
 router.get('/admin', (req, res) => {
