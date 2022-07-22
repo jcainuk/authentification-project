@@ -23,6 +23,17 @@ router.post('/signup', async (req, res) => {
   const enteredConfirmEmail = userData['confirm-email'];
   const enteredPassword = userData.password;
 
+  if (
+    !enteredEmail
+    || !enteredConfirmEmail
+    || !enteredPassword
+    || enteredPassword < 6
+    || enteredEmail !== enteredConfirmEmail || !enteredEmail.includes('@')
+  ) {
+    console.log('Incorrect data');
+    return res.redirect('/signup');
+  }
+
   const hashedPassword = await bcrypt.hash(enteredPassword, 12);
 
   const user = {
