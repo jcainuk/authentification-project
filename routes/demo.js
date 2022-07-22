@@ -23,9 +23,11 @@ router.post('/signup', async (req, res) => {
   const enteredConfirmEmail = userData['confirm-email'];
   const enteredPassword = userData.password;
 
+  const hashedPassword = await bcrypt.hash(enteredPassword, 12);
+
   const user = {
     email: enteredEmail,
-    password: enteredPassword,
+    password: hashedPassword,
 
   };
 
