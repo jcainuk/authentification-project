@@ -14,7 +14,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 
-app.use(session());
+app.use(session({
+  secret: 'super-secret',
+  resave: false,
+  saveUninitialized: false,
+  store: 
+}));
 
 app.use(demoRoutes);
 
