@@ -7,6 +7,8 @@ const mongodbStore = require('connect-mongodb-session')
 const db = require('./data/database');
 const demoRoutes = require('./routes/demo');
 
+const MongoDBStore = mongodbStore();
+
 const app = express();
 
 app.set('view engine', 'ejs');
