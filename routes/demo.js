@@ -36,7 +36,11 @@ router.post('/signup', async (req, res) => {
   res.redirect('/login');
 });
 
-router.post('/login', async (req, res) => {});
+router.post('/login', async (req, res) => {
+  const userData = req.body;
+  const enteredEmail = userData.email;
+  const enteredPassword = userData.password;
+});
 
 router.get('/admin', (req, res) => {
   res.render('admin');
