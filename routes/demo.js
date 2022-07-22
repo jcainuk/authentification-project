@@ -27,7 +27,7 @@ router.post('/signup', async (req, res) => {
     !enteredEmail
     || !enteredConfirmEmail
     || !enteredPassword
-    || enteredPassword < 6
+    || enteredPassword.trim() < 6
     || enteredEmail !== enteredConfirmEmail || !enteredEmail.includes('@')
   ) {
     console.log('Incorrect data');
