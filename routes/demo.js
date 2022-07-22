@@ -42,6 +42,19 @@ router.post('/login', async (req, res) => {
   const enteredPassword = userData.password;
 
   const existingUser = await db.getDb().collection('users').findOne({ email: enteredEmail });
+
+  if (!existingUser) {
+    console.log('Could not log in!');
+    return res.redirect('/login');
+  }
+  const passwordsAreEqual = await bcrypt.compare(enteredPassword, existingUser.password);
+
+  if (!passwordsAreEqual) {
+    console.log('Could not log in - passwords are not equal!');
+    return res.redirect('/login');
+  }
+  console.log('User is authenticated!');
+  res.redirect('admin');
 });
 
 router.get('/admin', (req, res) => {
