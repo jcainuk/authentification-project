@@ -30,8 +30,15 @@ router.post('/signup', async (req, res) => {
     || enteredPassword.trim() < 6
     || enteredEmail !== enteredConfirmEmail || !enteredEmail.includes('@')
   ) {
-    console.log('Incorrect data');
-    return res.redirect('/signup');
+    req.session.inputData = {
+      hasError: true,
+      message: 'Invalid input - please check your data.',
+      email: enteredEmail,
+      confirmEmail: enteredConfirmEmail,
+      password: enteredPassword,
+    };
+
+    req.session.save(() => res.redirect('/signup'));
   }
 
   const existingUser = await db.getDb().collection('users').findOne({ email: enteredEmail });
