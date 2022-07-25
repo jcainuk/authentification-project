@@ -10,7 +10,18 @@ router.get('/', (req, res) => {
 });
 
 router.get('/signup', (req, res) => {
-  res.render('signup');
+  let sessionInputData = req.session.inputData;
+
+  if (!sessionInputData) {
+    sessionInputData = {
+      hasError: false,
+      email: '',
+      confirmEmail: '',
+      password: '',
+    };
+  }
+
+  res.render('signup', { inputData: sessionInputData });
 });
 
 router.get('/login', (req, res) => {
