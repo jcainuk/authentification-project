@@ -74,7 +74,7 @@ router.post('/login', async (req, res) => {
 
   req.session.user = { id: existingUser._id, email: existingUser.email };
   req.session.isAuthenticated = true;
-  req.session.save(() => { res.redirect('admin'); });
+  req.session.save(() => { res.redirect('/admin'); });
 });
 
 router.get('/admin', (req, res) => {
