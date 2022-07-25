@@ -7,6 +7,9 @@
   <%- include('includes/header.ejs') %>
   <main id="signup">
     <h1>Signup</h1>
+    <% if (inputData.hasError) { %>
+    <p id="input-error"><%= inputData.message %></p>
+    <% } %>    
     <form action="/signup" method="POST">
       <div class="form-control">
         <label for="email">Email</label>
