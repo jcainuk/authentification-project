@@ -85,6 +85,10 @@ router.get('/admin', (req, res) => {
   res.render('admin');
 });
 
-router.post('/logout', (req, res) => {});
+router.post('/logout', (req, res) => {
+  req.session.user = null;
+  req.session.isAuthenticated = false;
+  res.redirect('/');
+});
 
 module.exports = router;
