@@ -20,6 +20,7 @@ router.get('/signup', (req, res) => {
       password: '',
     };
   }
+  req.session.inputData = null;
 
   res.render('signup', { inputData: sessionInputData });
 });
