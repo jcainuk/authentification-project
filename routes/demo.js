@@ -49,7 +49,10 @@ router.post('/signup', async (req, res) => {
       password: enteredPassword,
     };
 
-    req.session.save(() => res.redirect('/signup'));
+    req.session.save(() => {
+      res.redirect('/signup');
+    });
+    return;
   }
 
   const existingUser = await db.getDb().collection('users').findOne({ email: enteredEmail });
