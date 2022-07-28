@@ -142,7 +142,7 @@ router.get('/admin', async (req, res) => {
 });
 
 router.get('/profile', (req, res) => {
-  if (!req.session.isAuthenticated) {
+  if (!req.locals.isAuth) {
     return res.status(401).render('401');
   }
 
