@@ -59,8 +59,15 @@ router.post('/signup', async (req, res) => {
   const existingUser = await db.getDb().collection('users').findOne({ email: enteredEmail });
 
   if (existingUser) {
-    console.log('User exists already');
-    return res.redirect('/signup');
+    req.session.inputData = {
+      hasError: true,
+      message: 'User exists already!',
+      email: enteredEmail,
+      confirmEmail: enteredConfirmEmail,
+      password: enteredPassword,
+    };
+    req.session.save(() => res.redirect('/signup'));
+    return;
   }
 
   const hashedPassword = await bcrypt.hash(enteredPassword, 12);
