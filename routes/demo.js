@@ -107,6 +107,14 @@ router.get('/admin', (req, res) => {
   res.render('admin');
 });
 
+router.get('/profile', (req, res) => {
+  if (!req.session.isAuthenticated) {
+    return res.status(401).render('401');
+  }
+
+  res.render('profile');
+});
+
 router.post('/logout', (req, res) => {
   req.session.user = null;
   req.session.isAuthenticated = false;
