@@ -96,7 +96,7 @@ router.post('/login', async (req, res) => {
 
   req.session.user = { id: existingUser._id, email: existingUser.email };
   req.session.isAuthenticated = true;
-  req.session.save(() => { res.redirect('/admin'); });
+  req.session.save(() => { res.redirect('/profile'); });
 });
 
 router.get('/admin', async (req, res) => {
@@ -106,7 +106,7 @@ router.get('/admin', async (req, res) => {
 
   const user = await db.getDb().collection('users').findOne({ _id: req.session.user.id });
   if (!user || !user.isAdmin) {
-    res.render('403');
+    return res.status(403).render('403');
   }
 
   res.render('admin');
