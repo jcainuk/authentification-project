@@ -26,7 +26,17 @@ router.get('/signup', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  res.render('login');
+  let sessionInputData = req.session.inputData;
+
+  if (!sessionInputData) {
+    sessionInputData = {
+      hasError: false,
+      email: '',
+      password: '',
+    };
+  }
+  req.session.inputData = null;
+  res.render('login', { inputData: sessionInputData });
 });
 
 router.post('/signup', async (req, res) => {
