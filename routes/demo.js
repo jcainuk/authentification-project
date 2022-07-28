@@ -130,7 +130,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/admin', async (req, res) => {
-  if (!req.locals.isAuth) {
+  if (!res.locals.isAuth) {
     return res.status(401).render('401');
   }
 
@@ -142,7 +142,7 @@ router.get('/admin', async (req, res) => {
 });
 
 router.get('/profile', (req, res) => {
-  if (!req.locals.isAuth) {
+  if (!res.locals.isAuth) {
     return res.status(401).render('401');
   }
 
