@@ -130,12 +130,11 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/admin', async (req, res) => {
-  if (!req.session.isAuthenticated) {
+  if (!req.locals.isAuth) {
     return res.status(401).render('401');
   }
 
-  const user = await db.getDb().collection('users').findOne({ _id: req.session.user.id });
-  if (!user || !user.isAdmin) {
+  if (!res.locals.isAdmin) {
     return res.status(403).render('403');
   }
 
