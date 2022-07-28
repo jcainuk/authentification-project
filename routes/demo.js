@@ -103,7 +103,13 @@ router.post('/login', async (req, res) => {
   const passwordsAreEqual = await bcrypt.compare(enteredPassword, existingUser.password);
 
   if (!passwordsAreEqual) {
-    console.log('Could not log in - passwords are not equal!');
+    req.session.inputData = {
+      hasError: true,
+      message: 'Could not log you in - please check your credentials!',
+      email: enteredEmail,
+      password: enteredPassword,
+    };
+
     return res.redirect('/login');
   }
 
