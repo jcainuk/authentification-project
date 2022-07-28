@@ -91,7 +91,13 @@ router.post('/login', async (req, res) => {
   const existingUser = await db.getDb().collection('users').findOne({ email: enteredEmail });
 
   if (!existingUser) {
-    console.log('Could not log in!');
+    req.session.inputData = {
+      hasError: true,
+      message: 'Could not log you in - please check your credentials',
+      email: enteredEmail,
+      password: enteredPassword,
+    };
+
     return res.redirect('/login');
   }
   const passwordsAreEqual = await bcrypt.compare(enteredPassword, existingUser.password);
