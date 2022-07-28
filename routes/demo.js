@@ -98,6 +98,7 @@ router.post('/login', async (req, res) => {
       password: enteredPassword,
     };
     req.session.save(() => res.redirect('/login'));
+    return;
   }
   const passwordsAreEqual = await bcrypt.compare(enteredPassword, existingUser.password);
 
@@ -109,7 +110,8 @@ router.post('/login', async (req, res) => {
       password: enteredPassword,
     };
 
-    return res.redirect('/login');
+    req.session.save(() => res.redirect('/login'));
+    return;
   }
 
   req.session.user = { id: existingUser._id, email: existingUser.email };
