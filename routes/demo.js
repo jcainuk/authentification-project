@@ -99,9 +99,14 @@ router.post('/login', async (req, res) => {
   req.session.save(() => { res.redirect('/admin'); });
 });
 
-router.get('/admin', (req, res) => {
+router.get('/admin', async (req, res) => {
   if (!req.session.isAuthenticated) {
     return res.status(401).render('401');
+  }
+
+  const user = await db.getDb().collection('users').findOne({ _id: req.session.user.id });
+  if (!user || !user.isAdmin) {
+    res.render('403');
   }
 
   res.render('admin');
