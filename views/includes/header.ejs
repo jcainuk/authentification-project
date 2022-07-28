@@ -2,9 +2,10 @@
   <nav>
     <ul>
       <li><a href="/">Home</a></li>
+      <% if (!locals.isAuth) { %>
       <li><a href="/signup">Signup</a></li>
       <li><a href="/login">Login</a></li>
-      <% if (locals.isAdmin) { %>
+      <% } %> <% if (locals.isAdmin) { %>
       <li><a href="/admin">Admin</a></li>
       <% } %> <% if (locals.isAuth) { %>
       <li><a href="/profile">Profile</a></li>
